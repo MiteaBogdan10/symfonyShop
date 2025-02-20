@@ -1,0 +1,83 @@
+{{ include ('default/parts/headerStyle.html.twig') }}
+<body style="background-color: #212331;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <img class="logoShop" src="{{ asset('images/Logo2.PNG') }}" alt="Logo Website">
+        </div>
+        <div class="col-4 searchDiv">
+            <label style="position:absolute;display: flex;">
+                {{ render(controller('App\\Controller\\SearchController::search')) }}
+            </label>
+        </div>
+        <div class="col-2 contDiv">
+            {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    {# Verifică dacă nu suntem pe paginile admin și rutele nu sunt cele de administrare #}
+                    {% if app.request.attributes.get('_route') not in ['admin_panel', 'admin_category', 'admin_category_form', 'admin_category_edit'] %}
+                        {# Aici afișăm doar link-ul către admin_panel în cazul în care nu suntem pe una dintre paginile admin #}
+                        <a href="{{ path('admin_panel') }}" class="contText2 usernameLogin">
+                        </a>
+                    {% endif %}
+                {% endif %}
+                <a href="{{ path('app_logout') }}" class="contText2 usernameLogin">
+                    <span>{{ app.user.username }}</span>
+                </a>
+            {% else %}
+                <!-- Buton care deschide modalul -->
+                <p class="contText2" data-toggle="modal" data-target="#loginModal">
+                    Intra in cont <i class="fa-solid fa-user"></i>
+                </p>
+            {% endif %}
+        </div>
+        <div class="col-2 cartDiv">
+            <span class="badge badge-pill badge-danger position-absolute top-0 start-100 translate-middle">
+                    {{ cartService.getCartCount() }}
+            </span>
+            <a href="{{ path('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+    </div>
+</div>
+
+{% if is_granted('ROLE_ADMIN') %}
+    {{ include('default/navbar/navbar_admin.html.twig') }}
+{% else %}
+    {{ include('default/navbar/navbar_user.html.twig') }}
+{% endif %}
+
+{% block body %}
+    <h1 class="text-white" style="display: flex;margin-top:15px;">Lista utilizatori <a class="btnNewProduct btn btn-primary" href="{{ path('app_user_new') }}">Creare utilizator nou</a></h1>
+
+    <table class="table text-white">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>IsVerified</th>
+                <th>Detalii</th>
+                <th>Editeaza</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a class="btn btn-outline-primary" href="{{ path('app_user_show', {'id': user.id}) }}">Detalii</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-info" href="{{ path('app_user_edit', {'id': user.id}) }}">Editeaza</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Nu au fost gasite inregistrari!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

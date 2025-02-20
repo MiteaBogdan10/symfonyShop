@@ -1,0 +1,103 @@
+{{ include ('default/parts/headerStyle.html.twig') }}
+    <body style="background-color: #212331;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                <img class="logoShop" src="{{ asset('images/Logo2.PNG') }}" alt="Logo Website">
+            </div>
+            <div class="col-4 searchDiv">
+                <label style="position:absolute;display: flex;">
+                    {{ render(controller('App\\Controller\\SearchController::search')) }}
+                </label>
+            </div>
+            <div class="col-2 contDiv">
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {# Verifică dacă nu suntem pe paginile admin și rutele nu sunt cele de administrare #}
+                        {% if app.request.attributes.get('_route') not in ['admin_panel', 'admin_category', 'admin_category_form', 'admin_category_edit'] %}
+                            {# Aici afișăm doar link-ul către admin_panel în cazul în care nu suntem pe una dintre paginile admin #}
+                            <a href="{{ path('admin_panel') }}" class="contText2 usernameLogin"></a>
+                        {% endif %}
+                    {% endif %}
+                    <a href="{{ path('app_logout') }}" class="contText2 usernameLogin">
+                        <span>{{ app.user.username }}</span>
+                    </a>
+                {% else %}
+                    <!-- Buton care deschide modalul -->
+                    <p class="contText2" data-toggle="modal" data-target="#loginModal">
+                        Intra in cont <i class="fa-solid fa-user"></i>
+                    </p>
+                {% endif %}
+            </div>
+            <div class="col-2 cartDiv">
+                <span class="badge badge-pill badge-danger position-absolute top-0 start-100 translate-middle">
+                    {{ cartService.getCartCount() }}
+                </span>
+                {% if app.user%}
+                    <a  href="{{ url('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+                {% else %}
+                    <a  href="{{ url('app_login') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('default/navbar/navbar_admin.html.twig') }}
+    {% else %}
+        {{ include('default/navbar/navbar_user.html.twig') }}
+    {% endif %}
+
+    {{ include ('product/productView/productCard.html.twig') }}
+    <div class="container spaceBetween">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-3" style="margin-top:15px;">
+                    {% set image = product.productImages|first %} {# Ia prima imagine a produsului #}
+                    {% if image %}
+                        <img src="{{ asset('images/' ~ image.image) }}" class="w-100" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{{ asset('images/NoImage.PNG') }}" style="width: 255px;height: 165px;" alt="No Image">
+                    {% endif %}
+                    <p class="productName">{{ product.name }}</p>
+                    <p class="productDescription">{{ product.description }}</p>
+                    <span class="productWeight">Cantitate: {{ product.weight }}g</span>
+                    <span class="productPrice">Pret: {{ product.price}} Lei</span>
+                    {% if app.user%}
+                        <a class="btn btn-primary btnCart" href="{{ url('cart_add', {'product':product.id}) }}">Adauga in cos</a>
+                    {% else %}
+                        <a class="btn btn-primary btnCart" href="{{ url('app_login') }}">Adauga in cos</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {{ include ('default/parts/footer.html.twig') }}
+    </body>
+
+// Script personalizat pentru a activa dropdown-ul
+<script>
+    $(document).ready(function(){
+    $('.dropdown-toggle').click(function(e) {
+    var $el = $(this).next('.dropdown-menu');
+    var isVisible = $el.is(':visible');
+
+    // Închide toate dropdown-urile deschise
+    $('.dropdown-menu').slideUp('400');
+
+    // Dacă dropdown-ul nu era vizibil, îl deschide
+    if (!isVisible) {
+    $el.stop(true, true).slideDown('400');
+    }
+    e.stopPropagation();
+    });
+
+    // Închide dropdown-ul dacă faci click în altă parte pe pagină
+    $(document).click(function(e) {
+    if (!$(e.target).closest('.dropdown').length) {
+    $('.dropdown-menu').slideUp('400');
+            }
+        });
+    });
+</script>
+

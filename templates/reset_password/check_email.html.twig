@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="text-white checkEmail">
+        <p>
+            Dacă există un cont asociat adresei tale de e-mail, atunci ți-a fost trimis un e-mail care conține un link pe care îl poți folosi pentru a-ți reseta parola.
+            Acest link va expira în {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        </p>
+        <p>Dacă nu primești un e-mail, te rugăm să verifici folderul de spam sau <a class="btn btn-primary btnCheck" href="{{ path('app_forgot_password_request') }}">Incearca din nou</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,590 @@
+.logoShop {
+    width:120px;
+    height: 105px;
+    margin-left: 80px;
+}
+
+.fa-solid.fa-user{
+    width: 27px;
+    font-size: 19px;
+    color: #fff;
+    padding-left: 10px;
+}
+
+.fa-solid.fa-cart-shopping{
+    width: 27px;
+    font-size: 19px;
+    color: #fff;
+}
+
+.searchDiv {
+    width: 70%;
+    text-align: left;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 170px;
+}
+
+.searchInput {
+    width: 450px;
+    border-color: #0082e6;
+    border-radius: 16px;
+    box-shadow: none;
+    height: 32px;
+    line-height: 20px;
+    float: left;
+    margin-top: 20px;
+}
+
+.contDiv{
+    color: green;
+    margin-left: 85px;
+    flex: 0 0 300px;
+    max-width: 300px;
+}
+
+.contText{
+    color: #17d330;
+    margin-top: 35px;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 140px;
+    cursor: pointer;
+}
+
+.contText2{
+    color: #17d330;
+    margin-top: 35px;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 70px;
+    cursor: pointer;
+}
+
+
+.cartDiv{
+    color: green;
+    margin-top: 35px;
+    flex: 0 0 70px;
+    max-width: 70px;
+}
+
+.fa-solid.fa-cart-shopping{
+    padding-left: 5px;
+}
+
+.navbar{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.container-fluid{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-nav.linkSpace{
+    margin-left: 80px;
+}
+
+.linkPromo{
+    margin-left: 30px;
+}
+
+.site-footer-column5{
+    padding-top: 30px;
+    background: #3e3e3e;
+    padding-bottom: 16px;
+    bottom: 0;
+    left: 0;
+    right: 350px;
+    min-height: 200px;
+    margin-top: 50px;
+}
+
+.site-footer-column5.grid-footer {
+    display: grid;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.logoFooter{
+    width: 100px;
+    height: 85px;
+}
+
+.location-block{
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.block-text-admin{
+    margin-left: 120px;
+    width: 220px;
+}
+
+.section-blocks{
+    color: white;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.block-text-menu{
+    width: 250px;
+}
+
+.menu-footer_menu_3-list{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.menu-footer_menu_2-list{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.section-title{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.menu-footer_menu_3-item{
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.menu-footer_menu_2-item{
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.menu-footer_menu_4-item{
+    font-size: 14px;
+}
+
+.menu-footer_menu_4-list{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.usernameLogin{
+    position: relative;
+    top: 30px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+    right: 10px;
+}
+
+.spaceBetween{
+    margin-top:60px;
+}
+
+.productName {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.productDescription{
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.productWeight{
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.productPrice{
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 60px;
+}
+
+.btnCart{
+    margin-top: 10px;
+    margin-left: 60px;
+}
+
+.btnDeleteProduct{
+    margin-left: 1240px;
+    margin-bottom: 30px;
+}
+
+.btnUpdateProduct{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.btnBack {
+    margin-left: 850px;
+}
+
+.btnBack1 {
+    margin-left: 1300px;
+}
+
+.btnEditProduct{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+.btnNewProduct {
+  margin-left: 1080px;
+  margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.custom-form {
+    width: 1200px;
+    margin: 20px auto;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.custom-button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background: #0056b3;
+}
+
+.newProduct{
+    text-align: center;
+}
+
+.spaceTitle{
+    margin-top: 10px;
+}
+
+.btnFilter{
+    height: 40px;
+    margin-left: 10px;
+    margin-top: 18px;
+    border-radius: 10px;
+
+}
+
+.formAction{
+    width: 450px;
+    border-color: #0082e6;
+    border-radius: 16px;
+    box-shadow: none;
+    height: 32px;
+    line-height: 20px;
+    float: left;
+    margin-top: 20px;
+}
+
+.formSearch{
+    width: 450px;
+    border-color: #0082e6;
+    border-radius: 16px;
+    box-shadow: none;
+    height: 32px;
+    line-height: 20px;
+    float: left;
+    /*margin-top: 20px;*/
+}
+
+.fa.fa-search{
+    margin-left: 400px;
+    color: black;
+    margin-top: -55px;
+}
+
+.productValability{
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.productOffer{
+    background: #da1f47;
+    padding: 1rem 1rem 1rem 1.5rem;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.4;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    margin-left: 70px;
+    width: 170px;
+    text-align: center;
+}
+
+.btnRegister{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 500px;
+}
+
+.btnReset{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 460px;
+}
+
+.checkEmail{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.btnCheck{
+   margin-left: 10px;
+}
+
+/* 🌍 Pentru ecrane mari (desktop full HD) */
+@media (max-width: 1440px) {
+    .btnNewProduct, .btnBack, .btnBack1 {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        text-align: center;
+    }
+}
+
+/* 💻 Pentru rezoluții intermediare (1229px - 1024px) */
+@media (max-width: 1229px) {
+    .logoShop {
+        width: 120px;
+        height: auto;
+    }
+
+    .searchDiv {
+        width: 80%;
+        margin-left: 10px;
+    }
+
+    .searchInput {
+        width: 70%;
+    }
+
+    .contDiv, .cartDiv {
+        flex: 1 1 40%;
+        text-align: center;
+    }
+
+    .contText, .contText2 {
+        font-size: 18px;
+    }
+
+    .btnNewProduct, .btnBack, .btnBack1 {
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    .custom-form {
+        width: 80%;
+    }
+}
+
+/* 💻 Pentru rezoluții de 1000px */
+@media (max-width: 1000px) {
+    .logoShop {
+        width: 100px;
+        height: auto;
+    }
+
+    .searchDiv {
+        width: 80%;
+        margin-left: 10px;
+    }
+
+    .searchInput {
+        width: 70%;
+    }
+
+    .contDiv, .cartDiv {
+        flex: 1 1 40%;
+        text-align: center;
+    }
+
+    .contText, .contText2 {
+        font-size: 16px;
+    }
+
+    .btnNewProduct, .btnBack, .btnBack1 {
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    .custom-form {
+        width: 80%;
+    }
+
+    /* Ajustează imaginile */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* 💻 Pentru laptopuri și tablete mari */
+@media (max-width: 1024px) {
+    .logoShop {
+        width: 100px;
+        height: 90px;
+        margin-left: 20px;
+    }
+
+    .searchDiv {
+        width: 90%;
+        margin-left: 20px;
+    }
+
+    .searchInput {
+        width: 80%;
+    }
+
+    .contDiv, .cartDiv {
+        flex: 1 1 50%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .contText, .contText2 {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .navbar-nav.linkSpace {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .custom-form {
+        width: 95%;
+    }
+
+    .custom-input {
+        width: 100%;
+    }
+}
+
+/* 📟 Pentru tablete (ecrane medii) */
+@media (max-width: 768px) {
+    .logoShop {
+        width: 80px;
+        height: 70px;
+        margin-left: 10px;
+    }
+
+    .searchDiv {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .searchInput {
+        width: 90%;
+    }
+
+    .contDiv, .cartDiv {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .contText, .contText2 {
+        padding-left: 0;
+        font-size: 16px;
+    }
+
+    .btnNewProduct, .btnBack, .btnBack1 {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .custom-form {
+        width: 90%;
+    }
+
+}
+
+/* 📱 Pentru telefoane (ecrane mici) */
+@media (max-width: 480px) {
+    .logoShop {
+        width: 60px;
+        height: 50px;
+    }
+
+    .searchDiv {
+        width: 100%;
+        text-align: center;
+        margin: 10px auto;
+    }
+
+    .searchInput {
+        width: 100%;
+    }
+
+    .navbar-nav.linkSpace {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .contText, .contText2 {
+        font-size: 14px;
+    }
+
+    .btnNewProduct, .btnBack, .btnBack1 {
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .custom-form {
+        width: 100%;
+    }
+
+    .custom-input {
+        width: 100%;
+    }
+
+    .productOffer {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* 📱 Pentru telefoane foarte mici */
+@media (max-width: 320px) {
+    .logoShop {
+        width: 50px;
+        height: 40px;
+    }
+
+    .contText, .contText2 {
+        font-size: 12px;
+    }
+
+    .btnNewProduct, .btnBack, .btnBack1 {
+        font-size: 14px;
+    }
+}
+

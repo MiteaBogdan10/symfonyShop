@@ -1,0 +1,9 @@
+<h1>Buna ziua!</h1>
+
+<p>Pentru a-ti reseta parola intra pe urmatorul link</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p>Acest link va expira în {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+<p>Cheers!</p>

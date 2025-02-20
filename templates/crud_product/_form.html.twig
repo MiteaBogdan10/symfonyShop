@@ -1,0 +1,9 @@
+{{ form_start(form, {'attr': {'class': 'custom-form'}} ) }}
+    {{ form_widget(form, {'attr': {'class': 'custom-input'}}) }}
+    <button class="btn btn-primary btnUpdateProduct">{{ button_label|default('Salveaza') }}</button>
+    <a class="btnBack btn btn-info" href="{{ path('app_crud_product_index') }}">Inapoi la lista de produse</a>
+{{ form_end(form) }}
+{# Afișează butonul de ștergere doar dacă există deja un ID (deci nu este cazul de creare) #}
+    {% if product is defined and product.id is not null %}
+        {{ include('crud_product/_delete_form.html.twig') }}
+    {% endif %}

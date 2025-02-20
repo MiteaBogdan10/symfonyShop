@@ -1,0 +1,100 @@
+{{ include ('default/parts/headerStyle.html.twig') }}
+<body style="background-color: #212331;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <img class="logoShop" src="{{ asset('images/Logo2.PNG') }}" alt="Logo Website">
+        </div>
+        <div class="col-4 searchDiv">
+            <label style="position:absolute;display: flex;">
+                {{ render(controller('App\\Controller\\SearchController::search')) }}
+            </label>
+        </div>
+        <div class="col-2 contDiv">
+            {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    {# Verifică dacă nu suntem pe paginile admin și rutele nu sunt cele de administrare #}
+                    {% if app.request.attributes.get('_route') not in ['admin_panel', 'admin_category', 'admin_category_form', 'admin_category_edit'] %}
+                        {# Aici afișăm doar link-ul către admin_panel în cazul în care nu suntem pe una dintre paginile admin #}
+                        <a href="{{ path('admin_panel') }}" class="contText2 usernameLogin">
+                        </a>
+                    {% endif %}
+                {% endif %}
+                <a href="{{ path('app_logout') }}" class="contText2 usernameLogin">
+                    <span>{{ app.user.username }}</span>
+                </a>
+            {% else %}
+                <!-- Buton care deschide modalul -->
+                <p class="contText2" data-toggle="modal" data-target="#loginModal">
+                    Intra in cont <i class="fa-solid fa-user"></i>
+                </p>
+            {% endif %}
+        </div>
+        <div class="col-2 cartDiv">
+           <span class="badge badge-pill badge-danger position-absolute top-0 start-100 translate-middle">
+                    {{ cartService.getCartCount() }}
+            </span>
+            {% if app.user%}
+                <a  href="{{ url('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+            {% else %}
+                <a  href="{{ url('app_login') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if is_granted('ROLE_ADMIN') %}
+    {{ include('default/navbar/navbar_admin.html.twig') }}
+{% else %}
+    {{ include('default/navbar/navbar_user.html.twig') }}
+{% endif %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <table class="table text-white">
+        <tr>
+            <th>Nume</th>
+            <th>Pret unitar</th>
+            <th>Cantitate</th>
+            <th>Pret total</th>
+        </tr>
+        {% for cartItem in cart.cartItems %}
+            <tr>
+                <td>{{ cartItem.product.name }}</td>
+                <td>{{ cartItem.product.price }}</td>
+                <td>
+                    <form action="{{ url('cart_update',{'product':cartItem.product.id}) }}" method="post">
+                        <input type="number" min="1" max="100" name="quantity" value="{{ cartItem.quantity }}">
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </form>
+                </td>
+                <td>
+                    {% if cartService.getPromoCartItemTotal(cartItem) != cartService.getCartItemTotal(cartItem) %}
+                        <strike>{{ cartService.getCartItemTotal(cartItem) }} RON</strike>
+                    {% endif %}
+                    {{ cartService.getPromoCartItemTotal(cartItem) }} RON
+                </td>
+                <td><a href="{{ url('cart_delete', {'product':cartItem.product.id}) }}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+                <strike>{{ cartService.getCartTotal() }} RON</strike>
+                <br />
+                {{ cartService.getPromoCartTotal() }} RON
+            </th>
+            <th></th>
+        </tr>
+    </table>
+    <a href="{{ url('cart_empty') }}" class="btn btn-danger">Sterg cos</a>
+</div>
+    {{ include ('default/parts/footer.html.twig') }}
+{% endblock %}

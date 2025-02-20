@@ -1,0 +1,241 @@
+{{ include ('default/parts/headerStyle.html.twig') }}
+<body style="background-color: #212331;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <img class="logoShop" src="{{ asset('images/Logo2.PNG') }}" alt="Logo Website">
+        </div>
+        <div class="col-4 searchDiv">
+            <label style="position:absolute;display: flex;">
+                {{ render(controller('App\\Controller\\SearchController::search')) }}
+            </label>
+        </div>
+        <div class="col-2 contDiv">
+            {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    {# Verifică dacă nu suntem pe paginile admin și rutele nu sunt cele de administrare #}
+                    {% if app.request.attributes.get('_route') not in ['admin_panel', 'admin_category', 'admin_category_form', 'admin_category_edit'] %}
+                        {# Aici afișăm doar link-ul către admin_panel în cazul în care nu suntem pe una dintre paginile admin #}
+                        <a href="{{ path('admin_panel') }}" class="contText2 usernameLogin">
+                        </a>
+                    {% endif %}
+                {% endif %}
+                <a href="{{ path('app_logout') }}" class="contText2 usernameLogin">
+                    <span>{{ app.user.username }}</span>
+                </a>
+            {% else %}
+                <!-- Buton care deschide modalul -->
+                <p class="contText2" data-toggle="modal" data-target="#loginModal">
+                    Intra in cont <i class="fa-solid fa-user"></i>
+                </p>
+            {% endif %}
+        </div>
+        <div class="col-2 cartDiv">
+            <span class="badge badge-pill badge-danger position-absolute top-0 start-100 translate-middle">
+                    {{ cartService.getCartCount() }}
+            </span>
+            {% if app.user%}
+                <a  href="{{ url('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+            {% else %}
+                <a  href="{{ url('app_login') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!--  LOGARE MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Logare</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ path('app_login') }}">
+                    {% if error is defined and error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username|default('') }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Parolă</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                    </div>
+
+                    <!-- CSRF Token -->
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <button type="submit" class="btn btn-primary">Logare</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-toggle="modal" data-target="#resetPasswordModal" data-dismiss="modal" href="{{ path('app_forgot_password_request') }}">Ai uitat parola?</a>
+                <a data-toggle="modal" data-target="#registerModal" data-dismiss="modal" href="{{ path('app_register') }}" class="ml-3">Înregistrează-te</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  RESETARE PAROLĂ MODAL -->
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Resetare Parolă</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ path('app_forgot_password_request') }}">
+                    <div class="form-group">
+                        <label for="resetEmail">Email</label>
+                        <input type="email" name="email" id="resetEmail" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Trimite link resetare</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Înapoi la Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  ÎNREGISTRARE MODAL -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Înregistrare</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ path('app_register') }}">
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" name="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Parolă</label>
+                        <input type="password" name="password" id="registerPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Înregistrează-te</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Înapoi la Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if is_granted('ROLE_ADMIN') %}
+{{ include('default/navbar/navbar_admin.html.twig') }}
+{% else %}
+{{ include('default/navbar/navbar_user.html.twig') }}
+{% endif %}
+
+{{ include ('product/productView/productCard.html.twig') }}
+
+<div class="container spaceBetween">
+    <div class="row">
+            <div class="col-4" style="margin-top:15px;">
+                <img src="{{ asset('images/Oferta3.PNG') }}" class="w-100" alt="...">
+                <p class="productName">Single Pop</p>
+                <span class="productValability">Ofertă valabilă până la 31.12.2025</span>
+                <p class="productDescription">Pizza 28 cm + Pop Cola 0,33L</p>
+                <div class="productOffer">
+                    Reducere
+                    <span>-7lei</span>
+                </div>
+            </div>
+            <div class="col-4" style="margin-top:15px;">
+                <img src="{{ asset('images/Oferta4.PNG') }}" class="w-100" alt="...">
+                <p class="productName">Medium POP</p>
+                <span class="productValability">Ofertă valabilă până la 31.12.2025</span>
+                <p class="productDescription">Pizza 34 cm + Pop Cola 0,5L</p>
+                <div class="productOffer">
+                    Reducere
+                    <span>-9lei</span>
+                </div>
+            </div>
+            <div class="col-4" style="margin-top:15px;">
+                <img src="{{ asset('images/Oferta5.PNG') }}" class="w-100" alt="...">
+                <p class="productName">Big POP</p>
+                <span class="productValability">Ofertă valabilă până la 31.12.2025</span>
+                <p class="productDescription">Pizza 40 cm + Pop Cola 1,5L</p>
+                <div class="productOffer">
+                    Reducere
+                    <span>-15lei</span>
+                </div>
+            </div>
+    </div>
+</div>
+
+{{ include ('default/parts/footer.html.twig') }}
+</body>
+
+// Script personalizat pentru a activa dropdown-ul
+<script>
+    $(document).ready(function(){
+        $('.dropdown-toggle').click(function(e) {
+            var $el = $(this).next('.dropdown-menu');
+            var isVisible = $el.is(':visible');
+
+            // Închide toate dropdown-urile deschise
+            $('.dropdown-menu').slideUp('400');
+
+            // Dacă dropdown-ul nu era vizibil, îl deschide
+            if (!isVisible) {
+                $el.stop(true, true).slideDown('400');
+            }
+            e.stopPropagation();
+        });
+
+        // Închide dropdown-ul dacă faci click în altă parte pe pagină
+        $(document).click(function(e) {
+            if (!$(e.target).closest('.dropdown').length) {
+                $('.dropdown-menu').slideUp('400');
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Selectează toate butoanele "Adaugă în coș" și iconița coșului
+        var addToCartButtons = document.querySelectorAll(".btnCart");
+        var cartIcon = document.querySelector(".cartDiv a");
+
+        // Verific dacă utilizatorul este autentificat
+        var isUserLoggedIn = {{ app.user ? 'true' : 'false' }};
+
+        addToCartButtons.forEach(function(button) {
+            button.addEventListener("click", function(event) {
+                if (!isUserLoggedIn) {
+                    event.preventDefault(); // Oprește navigarea către pagina de login
+                    var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                    loginModal.show();
+                }
+            });
+        });
+
+        // Același mecanism pentru iconița coșului
+        cartIcon.addEventListener("click", function(event) {
+            if (!isUserLoggedIn) {
+                event.preventDefault();
+                var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            }
+        });
+    });
+</script>

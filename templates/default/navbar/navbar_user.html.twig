@@ -1,0 +1,63 @@
+{#<nav class="navbar navbar-expand-lg bg-body-tertiary">#}
+{#    <div class="container-fluid bg-success">#}
+{#        <div class="collapse navbar-collapse" id="navbarNavDropdown">#}
+{#            <ul class="navbar-nav linkSpace">#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link text-white active" aria-current="page" href="{{ url('home') }}">Acasă</a>#}
+{#                </li>#}
+{#                <li class="nav-item linkPromo">#}
+{#                    <a class="nav-link text-white" href="{{ path('user_offers') }}">Oferte</a>#}
+{#                </li>#}
+{#                <li class="nav-item linkPromo dropdown">#}
+{#                    <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">#}
+{#                        Meniu#}
+{#                    </a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        {% for category in twigGlobalsService.getMenuCategories() %}#}
+{#                            <li>#}
+{#                                <a class="dropdown-item text-center" href="{{ path('category', {'category': category.id}) }}">#}
+{#                                    {{ category.name }}#}
+{#                                    <span class="badge badge-secondary ml-1">{{ category.getProducts()|length }}</span>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-success">
+    <!-- Butonul hamburger (apare doar pe ecrane mici) -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Meniul principal -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav linkSpace">
+            <li class="nav-item">
+                <a class="nav-link text-white active" aria-current="page" href="{{ url('home') }}">Acasă</a>
+            </li>
+            <li class="nav-item linkPromo">
+                <a class="nav-link text-white" href="{{ path('user_offers') }}">Oferte</a>
+            </li>
+            <li class="nav-item linkPromo dropdown">
+                <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Meniu
+                </a>
+                <ul class="dropdown-menu">
+                    {% for category in twigGlobalsService.getMenuCategories() %}
+                        <li>
+                            <a class="dropdown-item text-center" href="{{ path('category', {'category': category.id}) }}">
+                                {{ category.name }}
+                                <span class="badge badge-secondary ml-1">{{ category.getProducts()|length }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

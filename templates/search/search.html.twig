@@ -1,0 +1,7 @@
+{{  form_start(form,{
+    'attr': {'class': 'formAction', 'action': path('handleSearch')}
+})  }}
+    {{ form_widget(form.search, {
+        'attr': {'class':'formSearch', 'placeholder': 'Cauta mancarea preferata'}
+    }) }}
+{{ form_end(form)}}
